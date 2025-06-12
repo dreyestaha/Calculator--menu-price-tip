@@ -1,10 +1,11 @@
 import { menuItems } from "./data/db"
 import MenuItem from "./components/MenuItem"
 import {useOrder} from "./hooks/useOrder"
+import OrderItems from "./components/OrderItems"
 
 function App() {
  
-  const {addItem} = useOrder()
+  const {order, addItem, removeItem} = useOrder()
 
   return (
     <>
@@ -30,7 +31,11 @@ function App() {
 
         {/* Consumo, propina y portal del pago */}
         <section>
-          <h2 className="text-3xl mb-4 font-black text-center">Consumo</h2>
+          <OrderItems
+            order={order}
+            removeItem={removeItem}
+          />
+          
         </section>
       </main>
     
