@@ -3,10 +3,11 @@ import MenuItem from "./components/MenuItem"
 import {useOrder} from "./hooks/useOrder"
 import OrderItems from "./components/OrderItems"
 import OrderTotals from "./components/OrderTotals"
+import TipForm from "./components/TipForm"
 
 function App() {
  
-  const {order, addItem, removeItem} = useOrder()
+  const {order, addItem, removeItem, tip, setTip, saveOrder} = useOrder()
 
   return (
     <>
@@ -32,15 +33,26 @@ function App() {
 
         {/* Consumo, propina y portal del pago */}
         <section>
-          <OrderItems
-            order={order}
-            removeItem={removeItem}
-          />
+          {order.length ?
+          <>
+            <OrderTotals
+              order={order}
+              tip={tip}
+              saveOrder={saveOrder}
+            />
 
-          <OrderTotals
-            order={order}
-          />
-          
+            <TipForm
+              setTip={setTip}
+              tip={tip}
+            />
+            
+            <OrderItems
+              order={order}
+              removeItem={removeItem}
+            />
+          </>
+          :             
+            <p className="text-center text-3xl font-black text-black/25 ">Orden Vacía...</p>}
         </section>
       </main>
     
